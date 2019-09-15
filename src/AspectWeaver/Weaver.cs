@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
 using AspectWeaver.Util;
-using TLN.Platform.GeneralNonsense;
 
 namespace AspectWeaver {
   /// <summary>

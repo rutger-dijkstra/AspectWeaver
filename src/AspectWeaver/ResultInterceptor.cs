@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using TLN.Platform.GeneralNonsense;
+using AspectWeaver.Util;
 
 namespace AspectWeaver {
   class ResultInterceptor<S>: InvocationInterceptor {

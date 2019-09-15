@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TLN.Platform.GeneralNonsense;
+using AspectRetry.Util;
 
 namespace AspectWeaver {
 

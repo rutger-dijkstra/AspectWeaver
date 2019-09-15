@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using TLN.Platform.GeneralNonsense;
 
 namespace AspectWeaver.Tests
 {

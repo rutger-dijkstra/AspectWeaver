@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using AspectWeaver.Util;
-using TLN.Platform.GeneralNonsense.UniversalExtensions;
 
 namespace AspectWeaver {
   /// <summary>
