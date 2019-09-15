@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 variables:
   buildConfiguration: 'Release'
@@ -26,8 +26,10 @@ steps:
     projects: 'src/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration) --filter TestCategory!=Integration'
 
-- task: CmdLine@2
-  displayName: Push
+- task: NuGetCommand@2
   inputs:
-    script: |
-      dotnet nuget push -s https://api.nuget.org/v3/index.json -k $(NuGetApiKey) src/**/*.nupkg
+    command: 'push'
+    packagesToPush: 'src/**/*.nupkg;!src/**/*.symbols.nupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'NuGet.org'
+    allowPackageConflicts: true
