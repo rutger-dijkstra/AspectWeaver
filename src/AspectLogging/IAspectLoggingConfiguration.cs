@@ -2,8 +2,8 @@
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 
-namespace AspectWeaver {
-  public interface ILoggingAspectConfiguration {
+namespace AspectLogging {
+  public interface IAspectLoggingConfiguration {
     bool? IncludeException { get; }
     LogLevel LogLevelBefore { get; }
     LogLevel LogLevelOnCompletion { get; }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AspectRetry.Util;
 
-namespace AspectWeaver {
+namespace AspectRetry {
 
   /// <summary>
   /// The interface of <see cref="RetryStrategy"/>.

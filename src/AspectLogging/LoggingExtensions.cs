@@ -1,9 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using AspectWeaver;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Reflection;
 
-namespace AspectWeaver {
+namespace AspectLogging {
   /// <summary>
   /// Extension methods that weave an aspect into an interface implementation.
   /// </summary>
@@ -20,7 +21,7 @@ namespace AspectWeaver {
     /// </param>
     /// <returns></returns>
     public static T AddLoggingAspect<T>(
-        this T target, IServiceProvider provider, ILoggingAspectConfiguration configuration = null
+        this T target, IServiceProvider provider, IAspectLoggingConfiguration configuration = null
     ) where T : class =>
         target.AddLoggingAspect(provider.GetRequiredService<ILogger<T>>(), configuration);
 
@@ -33,14 +34,14 @@ namespace AspectWeaver {
     /// <param name="configuration">Configuration.</param>
     /// <returns></returns>
     public static T AddLoggingAspect<T>(
-        this T target, ILogger logger, ILoggingAspectConfiguration configuration = null
+        this T target, ILogger logger, IAspectLoggingConfiguration configuration = null
     ) where T : class {
       var config = configuration ?? new LoggingAspectConfiguration();
       return Weaver.Create(target, (targetMethod) => config.CreateLoggingInterceptor<T>(targetMethod, logger));
     }
 
     private static InvocationInterceptor CreateLoggingInterceptor<T>(
-        this ILoggingAspectConfiguration config, MethodInfo targetMethod, ILogger logger
+        this IAspectLoggingConfiguration config, MethodInfo targetMethod, ILogger logger
     ) =>
         config.IncludeInherited || targetMethod.DeclaringType == typeof(T) ? new LoggingInterceptor(targetMethod, logger, config) : null;
 

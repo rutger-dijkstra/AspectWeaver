@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
-using AspectWeaver.Util;
+using AspectLogging.Util;
 
-namespace AspectWeaver {
+namespace AspectLogging {
   /// <summary>
   /// Atribute to mark a string property or a parameter/return value in an interface as private
   /// in order to replace it in the <see cref="LoggingInterceptor"/> by '***'.

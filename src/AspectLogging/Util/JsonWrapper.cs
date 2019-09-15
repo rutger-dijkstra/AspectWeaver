@@ -4,7 +4,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace AspectWeaver.Util
+namespace AspectLogging.Util
 {
     public class JsonWrapper
     {

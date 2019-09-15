@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using Microsoft.Extensions.Logging;
-using AspectWeaver.Util;
+using AspectLogging.Util;
 
-namespace AspectWeaver {
+namespace AspectLogging {
   /// <summary>
   /// Configuration for the <see cref="LoggingInterceptor"/>
   /// </summary>
-  public class LoggingAspectConfiguration: ILoggingAspectConfiguration {
+  public class LoggingAspectConfiguration: IAspectLoggingConfiguration {
     /// <summary>
     /// The <see cref="LogLevel"/> to use when nothing else is specified.
     /// </summary>

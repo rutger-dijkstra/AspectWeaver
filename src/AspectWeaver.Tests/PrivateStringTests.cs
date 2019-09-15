@@ -3,8 +3,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using AspectWeaver.Util;
 using Test.Logging;
+using AspectLogging;
+using AspectLogging.Util;
 
 namespace AspectWeaver.Tests
 {

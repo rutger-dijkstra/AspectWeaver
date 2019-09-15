@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Internal;
 
 
-namespace AspectWeaver.Util
+namespace AspectLogging.Util
 {
     //Copied from Microsoft.Extensions.Logging.LoggerMessage and then moved the LogLevel argument from Define to the returned Action
 

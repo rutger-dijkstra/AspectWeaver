@@ -3,9 +3,10 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using AspectWeaver.Util;
+using AspectWeaver;
+using AspectLogging.Util;
 
-namespace AspectWeaver {
+namespace AspectLogging {
   /// <summary>
   /// An <see cref="InvocationInterceptor"/> for use with an <see cref="Weaver"/> 
   /// that wrap logging around a method call.
@@ -28,7 +29,7 @@ namespace AspectWeaver {
     );
 
     readonly ILogger _logger;
-    readonly ILoggingAspectConfiguration _config;
+    readonly IAspectLoggingConfiguration _config;
     readonly MethodInfo _invokedMethod;
     object[] _args;
     IDisposable _scope;
@@ -40,7 +41,7 @@ namespace AspectWeaver {
     /// <param name="invokedMethod">The method that is being invoked.</param>
     /// <param name="logger">The loger to use.</param>
     /// <param name="valueWrapper">An optional function to apply to arguments an results before they are passes to the logger.</param>
-    public LoggingInterceptor(MethodInfo invokedMethod, ILogger logger, ILoggingAspectConfiguration config) {
+    public LoggingInterceptor(MethodInfo invokedMethod, ILogger logger, IAspectLoggingConfiguration config) {
       _logger = logger;
       _config = config;
       _invokedMethod = invokedMethod;

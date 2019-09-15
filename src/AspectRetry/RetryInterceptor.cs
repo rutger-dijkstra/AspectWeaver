@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using AspectWeaver;
 
-namespace AspectWeaver {
+namespace AspectRetry {
   /// <summary>
   /// An <see cref="InvocationInterceptor"/> that adds a retry strategy to method calls.
   /// </summary>

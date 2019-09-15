@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Linq;
 
-namespace AspectWeaver.Util
+namespace AspectLogging.Util
 {
     public class ExtendableContractResolver: DefaultContractResolver
     {

@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Serialization;
 using System;
 
-namespace AspectWeaver.Util
+namespace AspectLogging.Util
 {
     interface IJsonConverterProvider
     {

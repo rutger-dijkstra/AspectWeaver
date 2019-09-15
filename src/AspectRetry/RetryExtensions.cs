@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using AspectWeaver;
 
-namespace AspectWeaver {
+namespace AspectRetry {
   public static class RetryExtensions {
     /// <summary>
     /// Adds a retry strategy to the implementation of an interface.
