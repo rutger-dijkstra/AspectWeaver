@@ -13,6 +13,11 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+
+- task: NuGetToolInstaller@1
+  inputs:
+    versionSpec: '5.2.0'
+    checkLatest: true
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
