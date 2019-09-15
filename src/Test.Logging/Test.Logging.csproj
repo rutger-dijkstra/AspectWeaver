@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -9,6 +9,7 @@
     <Copyright>Copyright © 2018 TLN B.V.</Copyright>
     <PackageIconUrl>https://developer.dev.thelearningnetwork.nl/public/img/favicon-32x32.png</PackageIconUrl>
     <Description>Internal TLN package for Logging related functionalities.</Description>
+    <LangVersion>7.3</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

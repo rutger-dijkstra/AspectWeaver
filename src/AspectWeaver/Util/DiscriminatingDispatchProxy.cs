@@ -21,13 +21,14 @@ namespace AspectWeaver.Util {
       abstract public object InvokeFunc(IMethodInvoker weaver, MethodInfo targetMethod, object[] args);
       abstract public object InvokeFuncAsync(IMethodInvoker weaver, MethodInfo targetMethod, object[] args);
 
-      class TypedResolver<S>: ResultTypeResolver {
-        public override object InvokeFunc(IMethodInvoker weaver, MethodInfo targetMethod, object[] args) =>
-          weaver.InvokeFunc<S>(targetMethod, args);
+    }
 
-        public override object InvokeFuncAsync(IMethodInvoker weaver, MethodInfo targetMethod, object[] args) =>
-          weaver.InvokeFuncAsync<S>(targetMethod, args);
-      }
+    class TypedResolver<S>: ResultTypeResolver {
+      public override object InvokeFunc(IMethodInvoker weaver, MethodInfo targetMethod, object[] args) =>
+        weaver.InvokeFunc<S>(targetMethod, args);
+
+      public override object InvokeFuncAsync(IMethodInvoker weaver, MethodInfo targetMethod, object[] args) =>
+        weaver.InvokeFuncAsync<S>(targetMethod, args);
     }
 
     static ConcurrentDictionary<Type, Func<IMethodInvoker, MethodInfo, object[], object>> _invokesByResult =
