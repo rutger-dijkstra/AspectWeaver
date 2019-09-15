@@ -32,3 +32,4 @@ steps:
     packagesToPush: 'src/**/*.nupkg;!src/**/*.symbols.nupkg'
     nuGetFeedType: 'external'
     publishFeedCredentials: 'NuGet.org'
+    allowPackageConflicts: true
