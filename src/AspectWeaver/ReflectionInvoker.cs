@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using System.Threading.Tasks;
-using TLN.Platform.GeneralNonsense.Reflection;
+using AspectWeaver.Util;
 
 namespace AspectWeaver {
   public class ReflectionInvoker: IMethodInvoker {

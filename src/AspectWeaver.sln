@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspectWeaver.Tests", "Aspec
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.Logging", "Test.Logging\Test.Logging.csproj", "{81EA7447-AD75-44B4-861B-9767516B4EE8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggingDecorator", "LoggingDecorator\LoggingDecorator.csproj", "{DC04F386-8DAC-4EFC-A103-F1320684B064}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{81EA7447-AD75-44B4-861B-9767516B4EE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81EA7447-AD75-44B4-861B-9767516B4EE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81EA7447-AD75-44B4-861B-9767516B4EE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC04F386-8DAC-4EFC-A103-F1320684B064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC04F386-8DAC-4EFC-A103-F1320684B064}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC04F386-8DAC-4EFC-A103-F1320684B064}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC04F386-8DAC-4EFC-A103-F1320684B064}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

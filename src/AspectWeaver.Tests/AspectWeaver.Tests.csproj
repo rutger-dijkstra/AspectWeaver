@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AspectWeaver\AspectWeaver.csproj" />
+    <ProjectReference Include="..\LoggingDecorator\LoggingDecorator.csproj" />
     <ProjectReference Include="..\Test.Logging\Test.Logging.csproj" />
   </ItemGroup>
 
