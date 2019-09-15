@@ -4,11 +4,11 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>1.0.0</Version>
-    <Company>The Learning Network</Company>
-    <Authors>The Learning Network</Authors>
-    <Copyright>Copyright © 2018 TLN B.V.</Copyright>
-    <PackageIconUrl>https://developer.dev.thelearningnetwork.nl/public/img/favicon-32x32.png</PackageIconUrl>
-    <Description>Internal TLN package for injecting orthogonal concerns into method invocations like retry, logging and exceptionhandling.</Description>
+    <Authors>Rutger Dijkstra, Michiel Koning</Authors>
+    <Copyright>Copyright © 2019 Rutger Dijkstra</Copyright>
+    <PackageIconUrl>https://github.com/rutger-dijkstra/AspectWeaver/tree/master/src/Weaving.png?raw=true</PackageIconUrl>
+    <Attribution>Weaving icon by Lisa Staudinger from the Noun Project</Attribution>
+    <Description>Package for injecting orthogonal concerns into method invocations like retry, logging and exceptionhandling.</Description>
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
 
