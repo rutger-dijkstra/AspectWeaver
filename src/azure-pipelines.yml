@@ -25,3 +25,10 @@ steps:
     command: test
     projects: 'src/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration) --filter TestCategory!=Integration'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'push'
+    nugetFeedType: 'external'
+    searchPatternPush: 'src/**/*.nupkg'
+    externalEndPoint: 'NuGet.org'
