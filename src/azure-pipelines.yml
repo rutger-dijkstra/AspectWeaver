@@ -26,10 +26,8 @@ steps:
     projects: 'src/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration) --filter TestCategory!=Integration'
 
-- task: NuGetCommand@2
+- task: DotNetCoreCLI@2
   inputs:
     command: 'push'
-    packagesToPush: 'src/**/*.nupkg;!src/**/*.symbols.nupkg'
-    nuGetFeedType: 'external'
-    publishFeedCredentials: 'NuGet.org'
-    allowPackageConflicts: true
+    packagesToPush: 'src/**/*.nupkg'
+    arguments: '-s https://api.nuget.org/v3/index.json -k $(NuGetApiKey)'
