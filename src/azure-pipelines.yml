@@ -31,10 +31,6 @@ steps:
     projects: 'src/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration) --filter TestCategory!=Integration'
 
-- task: NuGetCommand@2
-  inputs:
-    command: 'push'
-    packagesToPush: 'src/**/*.nupkg;!src/**/*.symbols.nupkg'
-    nuGetFeedType: 'external'
-    publishFeedCredentials: 'NuGet.org'
-    allowPackageConflicts: true
+- script: nuget push src/**/*.nupkg -SkipDuplicate -ApiKey $(NuGetApiKey)
+  displayName: Push
+ 
