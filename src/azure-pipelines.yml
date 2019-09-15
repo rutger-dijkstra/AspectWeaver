@@ -31,6 +31,6 @@ steps:
     projects: 'src/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration) --filter TestCategory!=Integration'
 
-- script: nuget push src/**/*.nupkg -SkipDuplicate -ApiKey $(NuGetApiKey) -Source https://api.nuget.org/v3/index.json
+- script: nuget push src/**/*.nupkg -SkipDuplicate -NoSymbols -ApiKey $(NuGetApiKey) -Source https://api.nuget.org/v3/index.json
   displayName: Push
  
