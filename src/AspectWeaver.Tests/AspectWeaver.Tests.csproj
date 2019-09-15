@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="aspectweaver" Version="0.9.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.1.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.3.2" />
@@ -16,7 +17,6 @@
   <ItemGroup>
     <ProjectReference Include="..\AspectLogging\AspectLogging.csproj" />
     <ProjectReference Include="..\AspectRetry\AspectRetry.csproj" />
-    <ProjectReference Include="..\AspectWeaver\AspectWeaver.csproj" />
     <ProjectReference Include="..\Test.Logging\Test.Logging.csproj" />
   </ItemGroup>
 
