@@ -26,8 +26,8 @@ steps:
     projects: 'src/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration) --filter TestCategory!=Integration'
 
-- task: DotNetCoreCLI@2
+- task: CmdLine@2
+  displayName: Push
   inputs:
-    command: 'push'
-    packagesToPush: 'src/**/*.nupkg'
-    arguments: '-s https://api.nuget.org/v3/index.json -k $(NuGetApiKey)'
+    script: |
+      dotnet nuget push -s https://api.nuget.org/v3/index.json -k $(NuGetApiKey) src/**/*.nupkg
