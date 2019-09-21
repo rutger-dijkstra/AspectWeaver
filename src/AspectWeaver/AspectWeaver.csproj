@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.9.1</Version>
+    <Version>0.9.2</Version>
     <Authors>Rutger Dijkstra, Michiel Koning</Authors>
     <Copyright>Copyright © 2019 Rutger Dijkstra</Copyright>
     <PackageIconUrl>https://raw.githubusercontent.com/rutger-dijkstra/AspectWeaver/master/src/Weaving-100x100.png</PackageIconUrl>
