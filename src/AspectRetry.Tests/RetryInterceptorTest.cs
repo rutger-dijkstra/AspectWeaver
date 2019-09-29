@@ -6,7 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace AspectWeaver.Tests {
+namespace AspectRetry.Tests {
   [TestClass]
   public class RetryInterceptorTest {
     IZoZo CreateZoZo(params int[] retries) {

@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.Logging", "Test.Loggin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspectLogging", "AspectLogging\AspectLogging.csproj", "{DC04F386-8DAC-4EFC-A103-F1320684B064}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspectRetry", "AspectRetry\AspectRetry.csproj", "{AEA04A41-FBFA-4BDC-8368-E387C1A0E0AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspectRetry", "AspectRetry\AspectRetry.csproj", "{AEA04A41-FBFA-4BDC-8368-E387C1A0E0AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspectLogging.Tests", "AspectLogging.Tests\AspectLogging.Tests.csproj", "{8CA8B00E-3BF1-4928-A91F-BF515F91204D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspectRetry.Tests", "AspectRetry.Tests\AspectRetry.Tests.csproj", "{783D82B3-90C0-49D4-B072-1161FCDFB2AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{AEA04A41-FBFA-4BDC-8368-E387C1A0E0AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEA04A41-FBFA-4BDC-8368-E387C1A0E0AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEA04A41-FBFA-4BDC-8368-E387C1A0E0AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CA8B00E-3BF1-4928-A91F-BF515F91204D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CA8B00E-3BF1-4928-A91F-BF515F91204D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CA8B00E-3BF1-4928-A91F-BF515F91204D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CA8B00E-3BF1-4928-A91F-BF515F91204D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{783D82B3-90C0-49D4-B072-1161FCDFB2AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{783D82B3-90C0-49D4-B072-1161FCDFB2AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{783D82B3-90C0-49D4-B072-1161FCDFB2AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{783D82B3-90C0-49D4-B072-1161FCDFB2AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

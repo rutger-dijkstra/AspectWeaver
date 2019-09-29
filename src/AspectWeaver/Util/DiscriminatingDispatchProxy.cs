@@ -48,7 +48,6 @@ namespace AspectWeaver.Util {
         return ResultTypeResolver.Create(type).InvokeFunc;
       });
 
-
     internal IMethodInvoker MethodInvoker { get; set; }
 
     /// <inheritdoc/>

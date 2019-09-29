@@ -4,12 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Test.Logging;
-using AspectLogging;
 using AspectLogging.Util;
 
-namespace AspectWeaver.Tests {
+namespace AspectLogging.Tests {
   [TestClass]
   public class PrivateStringTests: PrivateStringTests.IHoHo {
+
     interface IHoHo {
       [return: Private] string HoHo([Private]string jo, Hoppa hoppa);
     }

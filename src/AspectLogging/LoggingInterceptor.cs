@@ -65,8 +65,6 @@ namespace AspectLogging {
       return "***";
     }
 
-
-
     /// <inheritdoc />
     public override Advice BeforeCall(object[] args) {
       var parameters = _invokedMethod.GetParameters();

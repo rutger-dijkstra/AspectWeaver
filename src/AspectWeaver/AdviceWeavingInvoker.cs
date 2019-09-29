@@ -85,7 +85,6 @@ namespace AspectWeaver {
       }
     }
 
-
     public Task<S> InvokeFuncAsync<S>(MethodInfo targetMethod, object[] args) {
       var interceptor = _interceptorFactory(targetMethod);
       if( interceptor is null ) {

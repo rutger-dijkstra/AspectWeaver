@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Test.Logging;
 
-namespace AspectWeaver.Tests {
+namespace AspectLogging.Tests {
   [TestClass]
   public class LoggingInterceptorTest {
 

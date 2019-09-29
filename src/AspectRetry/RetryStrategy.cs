@@ -64,7 +64,6 @@ namespace AspectRetry {
     public bool ShouldRetry(Exception exception) =>
         !_conditions.Any() || _conditions.Any(shouldRetry => shouldRetry(exception));
 
-
     /// <summary>
     /// Adds handling of exceptions of the specified <typeparamref name="TException"/> type to
     /// the strategy. If the predicate <paramref name="shouldRetry"/> is not specified, all
@@ -106,6 +105,5 @@ namespace AspectRetry {
     public RetryStrategy(params int[] delays) : base(delays) { }
 
   }
-
 
 }

@@ -2,64 +2,31 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using AspectLogging;
-using AspectRetry;
-using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Test.Logging;
 
 namespace AspectWeaver.Tests {
   [TestClass]
-  public class AspectStackingTest {
-    ILoggerFactory _loggerFactory = new LoggerFactory();
-    Queue<TestLogEntry> _log = new Queue<TestLogEntry>();
-    LoggingAspectConfiguration _logConfig = new LoggingAspectConfiguration(includeInherited: true);
+  public partial class AspectStackingTest {
 
-    [TestInitialize]
-    public void TestInitialize() {
-      _log = new Queue<TestLogEntry>();
-      (_loggerFactory = new LoggerFactory()).AddTestLogger(_log.Enqueue);
+    interface It {
+      void Jo();
     }
-
-    ILogger GetLogger() => _loggerFactory.CreateLogger<IZoZo>();
-
-    IZoZo CreateStacked() =>
-      (new ZoZo() as IZoZo)
-      .AddLoggingAspect(GetLogger(), _logConfig)
-      .AddRetryAspect(new RetryStrategy(0, 0))
-      .AddLoggingAspect(GetLogger(), _logConfig);
-
-    void AssertLogEvents(params string[] eventNames) {
-      var n = 1;
-      foreach( var name in eventNames ) {
-        Assert.AreEqual(name, _log.Dequeue().EventId.Name, $"Log line {n++}");
-      }
+    class Imp: It {
+      public void Jo() { }
     }
 
     [TestMethod]
-    public void HopTest() {
-      var zozo = CreateStacked();
-      var result = zozo.Hop();
-      Assert.AreEqual(666, result);
-      Assert.AreEqual(8, _log.Count);
-      AssertLogEvents("Call", "Call", "Failure", "Call", "Failure", "Call", "Completed", "Completed");
+    public void TestAspectStacking() {
+      var calls = new List<string>();
+      var it = (new Imp() as It)
+        .AddAspect(_ => new CallRecorder(_, calls, "inner"))
+        .AddAspect(_ => new CallRecorder(_, calls, "outer"));
+      it.Jo();
+      Assert.AreEqual(
+        "Jo called in outer, Jo called in inner, Jo completed in inner, Jo completed in outer",
+        string.Join(", ", calls)
+      );
     }
 
-    [TestMethod]
-    public async Task BofTest() {
-      var zozo = CreateStacked();
-      var result = await zozo.Bof();
-      Assert.AreEqual(667, result);
-      Assert.AreEqual(8, _log.Count);
-      AssertLogEvents("Call", "Call", "Failure", "Call", "Failure", "Call", "Completed", "Completed");
-    }
-
-    [TestMethod]
-    public async Task LaLaTest() {
-      var zozo = CreateStacked();
-      await zozo.LaLa();
-      Assert.AreEqual(8, _log.Count);
-      AssertLogEvents("Call", "Call", "Failure", "Call", "Failure", "Call", "Completed", "Completed");
-    }
   }
 }
