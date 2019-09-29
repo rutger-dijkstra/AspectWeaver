@@ -6,6 +6,11 @@
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <NoWarn />
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="aspectweaver" Version="0.9.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.1.1" />

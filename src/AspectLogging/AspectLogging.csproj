@@ -12,6 +12,11 @@
     <Description>Package for injecting logging into method invocations.</Description>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <NoWarn />
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="aspectweaver" Version="0.9.0" />
   </ItemGroup>
