@@ -15,6 +15,7 @@
    <PropertyGroup>
     <NoWarn />
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
   </PropertyGroup>
 
   <ItemGroup>
