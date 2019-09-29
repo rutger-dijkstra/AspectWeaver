@@ -13,7 +13,7 @@ namespace AspectWeaver.Util {
   /// This class is not intended to be used rom user code.
   /// </summary>
   public class DiscriminatingDispatchProxy: DispatchProxy {
- 
+
     abstract class ResultTypeResolver {
       public static ResultTypeResolver Create(Type resultType) =>
         (ResultTypeResolver)Activator.CreateInstance(typeof(TypedResolver<>).MakeGenericType(resultType));
