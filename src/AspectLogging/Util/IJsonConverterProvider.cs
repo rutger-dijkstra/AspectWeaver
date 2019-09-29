@@ -2,10 +2,8 @@
 using Newtonsoft.Json.Serialization;
 using System;
 
-namespace AspectLogging.Util
-{
-    interface IJsonConverterProvider
-    {
-       JsonConverter Converter { get; } 
-    }
+namespace AspectLogging.Util {
+  interface IJsonConverterProvider {
+    JsonConverter Converter { get; }
+  }
 }

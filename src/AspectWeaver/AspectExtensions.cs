@@ -22,8 +22,6 @@ namespace AspectWeaver {
     ) where T : class =>
         Weaver.Create(target, interceptorFactory);
 
-
-
     /// <summary>
     /// Adds an aspect that executes the specified action <paramref name="onReturning"/> just before returning
     /// any function or task result of type <typeparamref name="S"/>.
