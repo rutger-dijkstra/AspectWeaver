@@ -5,12 +5,10 @@ using System.Threading.Tasks;
 namespace AspectWeaver {
   public class AdviceWeavingInvoker: IMethodInvoker {
 
-    static Advice AdviceContinue { get; } = new Advice(false);
-
     readonly IMethodInvoker _inner;
-    readonly Func<MethodInfo, InvocationInterceptor> _interceptorFactory;
+    readonly Func<MethodInfo, AdviceProvider> _interceptorFactory;
 
-    public AdviceWeavingInvoker(IMethodInvoker inner, Func<MethodInfo, InvocationInterceptor> interceptorFactory) {
+    public AdviceWeavingInvoker(IMethodInvoker inner, Func<MethodInfo, AdviceProvider> interceptorFactory) {
       _interceptorFactory = interceptorFactory;
       _inner = inner;
     }
@@ -22,18 +20,14 @@ namespace AspectWeaver {
         return;
       }
       using( interceptor ) {
-        var advice = interceptor.BeforeCall(args) ?? AdviceContinue;
-        while( !advice.IsCompleted ) {
-          advice.Ponder();
-          advice = null;
-          try {
-            _inner.InvokeAction(targetMethod, args);
-          } catch( Exception e ) {
-            advice = interceptor.OnError(e);
-            if( advice is null ) { throw; }
-          }
-          advice = advice ?? interceptor.AfterCompletion() ?? Advice.Done;
+        interceptor?.BeforeCall(args);
+        try {
+          _inner.InvokeAction(targetMethod, args);
+        } catch( Exception e ) {
+          interceptor?.OnError(e);
+          throw;
         }
+        interceptor?.AfterCompletion();
       }
     }
 
@@ -44,18 +38,14 @@ namespace AspectWeaver {
       }
       using( interceptor ) {
         S result = default;
-        var advice = interceptor.BeforeCall(args) ?? AdviceContinue;
-        while( !advice.IsCompleted ) {
-          advice.Ponder();
-          advice = null;
-          try {
-            result = _inner.InvokeFunc<S>(targetMethod, args);
-          } catch( Exception e ) {
-            advice = interceptor.OnError(e);
-            if( advice is null ) { throw; }
-          }
-          advice = advice ?? interceptor.AfterCompletion(result) ?? Advice.Done;
+        interceptor?.BeforeCall(args);
+        try {
+          result = _inner.InvokeFunc<S>(targetMethod, args);
+        } catch( Exception e ) {
+          interceptor?.OnError(e);
+          throw;
         }
+        interceptor?.AfterCompletion(result);
         return result;
       }
     }
@@ -69,18 +59,14 @@ namespace AspectWeaver {
 
       async Task WeavingInvoke() {
         using( interceptor ) {
-          var advice = interceptor.BeforeCall(args) ?? AdviceContinue;
-          while( !advice.IsCompleted ) {
-            await advice.PonderAsync();
-            advice = null;
-            try {
-              await _inner.InvokeActionAsync(targetMethod, args);
-            } catch( Exception e ) {
-              advice = interceptor.OnError(e);
-              if( advice is null ) { throw; }
-            }
-            advice = advice ?? interceptor.AfterCompletion() ?? Advice.Done;
+          interceptor?.BeforeCall(args);
+          try {
+            await _inner.InvokeActionAsync(targetMethod, args);
+          } catch( Exception e ) {
+            interceptor?.OnError(e);
+            throw;
           }
+          interceptor?.AfterCompletion();
         }
       }
     }
@@ -95,18 +81,14 @@ namespace AspectWeaver {
       async Task<S> WeavingInvoke() {
         using( interceptor ) {
           var result = default(S);
-          var advice = interceptor.BeforeCall(args) ?? AdviceContinue;
-          while( !advice.IsCompleted ) {
-            await advice.PonderAsync();
-            advice = null;
-            try {
-              result = await _inner.InvokeFuncAsync<S>(targetMethod, args);
-            } catch( Exception e ) {
-              advice = interceptor.OnError(e);
-              if( advice is null ) { throw; }
-            }
-            advice = advice ?? interceptor.AfterCompletion(result) ?? Advice.Done;
+          interceptor.BeforeCall(args);
+          try {
+            result = await _inner.InvokeFuncAsync<S>(targetMethod, args);
+          } catch( Exception e ) {
+            interceptor.OnError(e);
+            throw;
           }
+          interceptor.AfterCompletion(result);
           return result;
         }
       }
