@@ -5,13 +5,14 @@ using System.Linq;
 using System.Reflection;
 using AspectWeaver;
 using AspectLogging.Util;
+using System.Collections.Generic;
 
 namespace AspectLogging {
   /// <summary>
   /// An <see cref="InvocationInterceptor"/> for use with an <see cref="Weaver"/> 
   /// that wrap logging around a method call.
   /// </summary>
-  public class LoggingInterceptor: InvocationInterceptor {
+  class LoggingAspectProvider: AdviceProvider {
     private static readonly Action<ILogger, LogLevel, string, object[], Exception> _called = LogMessageBuilder.Define<string, object[]>(
         new EventId(1, "Call"), "Calling {Method:l}({Arguments:l})."
     );
@@ -36,26 +37,19 @@ namespace AspectLogging {
     Stopwatch _timer;
 
     /// <summary>
-    /// Constructs a <see cref="LoggingInterceptor"/>.
+    /// Constructs a <see cref="LoggingAspectProvider"/>.
     /// </summary>
     /// <param name="invokedMethod">The method that is being invoked.</param>
     /// <param name="logger">The loger to use.</param>
     /// <param name="valueWrapper">An optional function to apply to arguments an results before they are passes to the logger.</param>
-    public LoggingInterceptor(MethodInfo invokedMethod, ILogger logger, IAspectLoggingConfiguration config) {
+    public LoggingAspectProvider(MethodInfo invokedMethod, ILogger logger, IAspectLoggingConfiguration config) {
       _logger = logger;
       _config = config;
       _invokedMethod = invokedMethod;
-      _scope = _logger.BeginScope(invokedMethod.DeclaringType.Name + "." + invokedMethod.Name);
+      _scope = _logger.BeginScope(new Dictionary<string, string>() {
+        { "MethodName", invokedMethod.DeclaringType.Name + "." + invokedMethod.Name }
+      });
       _timer = new Stopwatch();
-    }
-
-    private static object Identity(object obj) => obj;
-
-    private static Advice Call(Action log) {
-      try {
-        log();
-      } catch { /* ignore */ }
-      return Advice.Proceed;
     }
 
     public object Wrap(ParameterInfo info, object value) {
@@ -66,47 +60,40 @@ namespace AspectLogging {
     }
 
     /// <inheritdoc />
-    public override Advice BeforeCall(object[] args) {
+    public override void BeforeCall(object[] args) {
       var parameters = _invokedMethod.GetParameters();
-      Call(() =>
-          _called(
-              _logger, _config.LogLevelBefore, _invokedMethod.Name,
-              _args = args.Select((o, i) => Wrap(parameters[i], o)).ToArray(), null
-          )
+      _called(
+        _logger, _config.LogLevelBefore, _invokedMethod.Name,
+        _args = args.Select((o, i) => Wrap(parameters[i], o)).ToArray(), null
       );
       _timer.Start();
-      return Advice.Proceed;
     }
 
     /// <inheritdoc />
-    public override Advice AfterCompletion() {
+    public override void AfterCompletion() {
       _timer.Stop();
-      return Call(() => _methodCompleted(_logger, _config.LogLevelOnCompletion, _invokedMethod.Name, _timer.ElapsedMilliseconds, null));
+      _methodCompleted(_logger, _config.LogLevelOnCompletion, _invokedMethod.Name, _timer.ElapsedMilliseconds, null);
     }
 
     /// <inheritdoc />
-    public override Advice AfterCompletion(object result) {
+    public override void AfterCompletion(object result) {
       _timer.Stop();
       var returnParam = _invokedMethod.ReturnParameter;
-      return Call(() =>
-         _functionCompleted(
-             _logger, _config.LogLevelOnCompletion, _invokedMethod.Name,
-             Wrap(returnParam, result), _timer.ElapsedMilliseconds, null)
+      _functionCompleted(
+        _logger, _config.LogLevelOnCompletion, _invokedMethod.Name,
+        Wrap(returnParam, result), _timer.ElapsedMilliseconds, null
       );
-
     }
 
     static bool IsExceptionLevel(LogLevel level) =>
         LogLevel.Warning <= level;
 
     /// <inheritdoc />
-    public override Advice OnError(Exception e) {
+    public override void OnError(Exception e) {
       var logLevelOnError = _config.LogLevelOnError;
-      return Call(() =>
-         _failed(
-             _logger, logLevelOnError, e.GetType().Name, e.Message, _invokedMethod.Name, _args,
-             _config.IncludeException ?? IsExceptionLevel(logLevelOnError) ? e : null
-         )
+      _failed(
+        _logger, logLevelOnError, e.GetType().Name, e.Message, _invokedMethod.Name, _args,
+        _config.IncludeException ?? IsExceptionLevel(logLevelOnError) ? e : null
       );
     }
 

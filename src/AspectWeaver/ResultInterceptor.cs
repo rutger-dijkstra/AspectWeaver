@@ -4,18 +4,17 @@ using System.Text;
 using AspectWeaver.Util;
 
 namespace AspectWeaver {
-  class ResultInterceptor<S>: InvocationInterceptor {
+  class ResultInterceptor<S>: AdviceProvider {
     private readonly Action<S> _onCompleted;
 
     public ResultInterceptor(Action<S> onCompleted) {
       _onCompleted = onCompleted.NotNull();
     }
 
-    public override Advice AfterCompletion(object result) {
+    public override void AfterCompletion(object result) {
       if( result is S sResult ) {
         _onCompleted(sResult);
       }
-      return base.AfterCompletion(result);
     }
   }
 }

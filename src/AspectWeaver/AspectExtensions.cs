@@ -13,12 +13,12 @@ namespace AspectWeaver {
     /// </summary>
     /// <typeparam name="T">The interface type.</typeparam>
     /// <param name="target">An implementation of <typeparamref name="T"/>.</param>
-    /// <param name="interceptorFactory">A factory method for the <see cref="InvocationInterceptor"/> implementing
+    /// <param name="interceptorFactory">A factory method for the <see cref="AdviceProvider"/> implementing
     /// the cross-cutting concern.
     /// </param>
     /// <returns></returns>
     public static T AddAspect<T>(
-        this T target, Func<MethodInfo, InvocationInterceptor> interceptorFactory
+        this T target, Func<MethodInfo, AdviceProvider> interceptorFactory
     ) where T : class =>
         Weaver.Create(target, interceptorFactory);
 

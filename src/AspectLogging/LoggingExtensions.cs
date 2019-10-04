@@ -16,7 +16,7 @@ namespace AspectLogging {
     /// <typeparam name="T">The interface type.</typeparam>
     /// <param name="target">An implementation of <typeparamref name="T"/>.</param>
     /// <param name="logger">The logger to use.</param>
-    /// <param name="valueWrapper">An optional function that the <see cref="LoggingInterceptor"/>
+    /// <param name="valueWrapper">An optional function that the <see cref="LoggingAspectProvider"/>
     /// can use to turn arguments and results into something readable.
     /// </param>
     /// <returns></returns>
@@ -40,10 +40,10 @@ namespace AspectLogging {
       return Weaver.Create(target, (targetMethod) => config.CreateLoggingInterceptor<T>(targetMethod, logger));
     }
 
-    private static InvocationInterceptor CreateLoggingInterceptor<T>(
+    private static AdviceProvider CreateLoggingInterceptor<T>(
         this IAspectLoggingConfiguration config, MethodInfo targetMethod, ILogger logger
     ) =>
-        config.IncludeInherited || targetMethod.DeclaringType == typeof(T) ? new LoggingInterceptor(targetMethod, logger, config) : null;
+        config.IncludeInherited || targetMethod.DeclaringType == typeof(T) ? new LoggingAspectProvider(targetMethod, logger, config) : null;
 
   }
 }
