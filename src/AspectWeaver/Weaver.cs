@@ -23,12 +23,23 @@ namespace AspectWeaver {
     /// <param name="interceptorFactory">A factory method for <see cref="InvocationInterceptor"/>s that implement 
     /// an orthogonal concern.</param>
     public static T Create<T>(T inner, Func<MethodInfo, InvocationInterceptor> interceptorFactory) where T : class {
-      _ = inner.NotNull();
       _ = interceptorFactory.NotNull(nameof(interceptorFactory));
+      return Wrap(inner, innerInvoker => new AdviceWeavingInvoker(innerInvoker, interceptorFactory));
+    }
+
+    /// <summary>
+    /// Creates an implementation of the specified interface <typeparamref name="T"/> from an
+    /// implementation <paramref name="inner"/> with the logic provided by the result of <paramref name="invocationWrapper"/>
+    /// wrapped around each method call.
+    /// </summary>
+    /// <typeparam name="T">The interface type to decorate.</typeparam>
+    /// <param name="inner">An implementation of interface <typeparamref name="T"/>.</param>
+    /// <param name="invocationWrapper">A factory method for a <see cref="IMethodInvoker"/> on the basis of an inner <see cref="IMethodInvoker"/>.</param>
+    public static T Wrap<T>(T inner, Func<IMethodInvoker, IMethodInvoker> invocationWrapper) where T : class {
+      _ = inner.NotNull();
       var proxy = DispatchProxy.Create<T, DiscriminatingDispatchProxy>();
-      var innerInvoker = inner is DiscriminatingDispatchProxy p ? p.MethodInvoker : new ReflectionInvoker(inner);
-      ((DiscriminatingDispatchProxy)(object)proxy).MethodInvoker =
-        new AdviceWeavingInvoker(innerInvoker, interceptorFactory);
+      ((DiscriminatingDispatchProxy)(object)proxy).MethodInvoker = 
+        invocationWrapper(inner is DiscriminatingDispatchProxy p ? p.MethodInvoker : new ReflectionInvoker(inner));
       return proxy;
     }
 
