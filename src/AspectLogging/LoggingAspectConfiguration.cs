@@ -7,7 +7,7 @@ using AspectLogging.Util;
 
 namespace AspectLogging {
   /// <summary>
-  /// Configuration for the <see cref="LoggingInterceptor"/>
+  /// Configuration for the <see cref="LoggingAspectProvider"/>
   /// </summary>
   public class LoggingAspectConfiguration: IAspectLoggingConfiguration {
     /// <summary>
@@ -18,11 +18,11 @@ namespace AspectLogging {
     /// <summary>
     /// Create an instance
     /// </summary>
-    /// <param name="logLevelBefore">The <see cref="LogLevel"/> to use in <see cref="LoggingInterceptor.BeforeCall(object[])"/>. 
+    /// <param name="logLevelBefore">The <see cref="LogLevel"/> to use in <see cref="LoggingAspectProvider.BeforeCall(object[])"/>. 
     /// Defaults to <see cref="LoggingAspectConfiguration.DefaultLevel"/>.</param>
-    /// <param name="logLevelOnCompletion">The <see cref="LogLevel"/> to use in <see cref="LoggingInterceptor.AfterCompletion"/> and <see cref="LoggingInterceptor.AfterCompletion(object)"/>. 
+    /// <param name="logLevelOnCompletion">The <see cref="LogLevel"/> to use in <see cref="LoggingAspectProvider.AfterCompletion"/> and <see cref="LoggingAspectProvider.AfterCompletion(object)"/>. 
     /// Defaults to <see cref="LoggingAspectConfiguration.DefaultLevel"/>.</param>
-    /// <param name="logLevelOnError">The <see cref="LogLevel"/> to use in <see cref="LoggingInterceptor.OnError(Exception)"/>. 
+    /// <param name="logLevelOnError">The <see cref="LogLevel"/> to use in <see cref="LoggingAspectProvider.OnError(Exception)"/>. 
     /// Defaults to <see cref="LoggingAspectConfiguration.DefaultLevel"/>.</param>
     /// <param name="includeExceptions">Whether to include the exception in the OnError logging. The default is to
     /// include the exception if <see cref="LoggingAspectConfiguration.LogLevelOnError"/> is one of <see cref="LogLevel.Warning"/>, <see cref="LogLevel.Error"/>,
@@ -45,17 +45,17 @@ namespace AspectLogging {
     }
 
     /// <summary>
-    /// The <see cref="LogLevel"/> to use in <see cref="LoggingInterceptor.BeforeCall(object[])"/>
+    /// The <see cref="LogLevel"/> to use in <see cref="LoggingAspectProvider.BeforeCall(object[])"/>
     /// </summary>
     public LogLevel LogLevelBefore { get; } = DefaultLevel;
 
     /// <summary>
-    /// The <see cref="LogLevel"/> to use in <see cref="LoggingInterceptor.AfterCompletion"/> and <see cref="LoggingInterceptor.AfterCompletion(object)"/>
+    /// The <see cref="LogLevel"/> to use in <see cref="LoggingAspectProvider.AfterCompletion"/> and <see cref="LoggingAspectProvider.AfterCompletion(object)"/>
     /// </summary>
     public LogLevel LogLevelOnCompletion { get; } = DefaultLevel;
 
     /// <summary>
-    /// The <see cref="LogLevel"/> to use in <see cref="LoggingInterceptor.OnError(Exception)"/>
+    /// The <see cref="LogLevel"/> to use in <see cref="LoggingAspectProvider.OnError(Exception)"/>
     /// </summary>
     public LogLevel LogLevelOnError { get; } = DefaultLevel;
 

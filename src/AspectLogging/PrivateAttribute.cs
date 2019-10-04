@@ -7,7 +7,7 @@ using AspectLogging.Util;
 namespace AspectLogging {
   /// <summary>
   /// Atribute to mark a string property or a parameter/return value in an interface as private
-  /// in order to replace it in the <see cref="LoggingInterceptor"/> by '***'.
+  /// in order to replace it in the <see cref="LoggingAspectProvider"/> by '***'.
   /// </summary>
   [AttributeUsage(AttributeTargets.Property | AttributeTargets.Parameter | AttributeTargets.ReturnValue)]
   public class PrivateAttribute: Attribute, IJsonConverterProvider {
