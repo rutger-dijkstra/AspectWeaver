@@ -16,10 +16,7 @@ namespace AspectRetry {
         this T target, IRetryStrategy strategy
     ) where T : class {
       if( strategy == null ) { return target; }
-      return Weaver.Create(
-          target,
-          (targetMethod) => new RetryInterceptor(strategy.ShouldRetry, strategy.Delays.GetEnumerator())
-      );
+      return Weaver.Wrap( target, inner => new RetryInvoker(inner,strategy));
     }
   }
 }

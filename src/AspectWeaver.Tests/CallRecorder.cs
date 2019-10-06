@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace AspectWeaver.Tests {
 
-  class CallRecorder: InvocationInterceptor {
+  class CallRecorder: AdviceProvider {
     private readonly MethodInfo _method;
     private readonly string _source = "";
     private readonly ICollection<string> _calls;
@@ -16,23 +16,19 @@ namespace AspectWeaver.Tests {
       _source = " in " + interceptorName;
     }
 
-    public override Advice BeforeCall(object[] args) {
+    public override void BeforeCall(object[] args) {
       _calls.Add($"{_method.Name} called{_source}");
-      return base.BeforeCall(args);
     }
 
-    public override Advice AfterCompletion() {
+    public override void AfterCompletion() {
       _calls.Add($"{_method.Name} completed{_source}");
-      return base.AfterCompletion();
-    }
+   }
 
-    public override Advice AfterCompletion(object result) {
+    public override void AfterCompletion(object result) {
       _calls.Add($"{_method.Name} returned {result}{_source}");
-      return base.AfterCompletion();
     }
-    public override Advice OnError(Exception e) {
+    public override void OnError(Exception e) {
       _calls.Add($"{_method.Name} threw {e.GetType()}{_source}");
-      return base.OnError(e);
-    }
+     }
   }
 }

@@ -3,10 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>0.9.1</Version>
+    <Version>0.9.3</Version>
     <Authors>Rutger Dijkstra, Michiel Koning</Authors>
     <Copyright>Copyright © 2019 Rutger Dijkstra</Copyright>
     <PackageIconUrl>https://raw.githubusercontent.com/rutger-dijkstra/AspectWeaver/master/src/Weaving-100x100.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/rutger-dijkstra/AspectWeaver</PackageProjectUrl>
     <Attribution>Weaving icon by Lisa Staudinger from the Noun Project</Attribution>
     <Description>Package for injecting a retry strategy into method invocations.</Description>
     <LangVersion>7.3</LangVersion>
@@ -19,7 +20,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AspectWeaver" Version="0.9.0" />
+    <PackageReference Include="AspectWeaver" Version="0.9.3" />
   </ItemGroup>
 
 </Project>

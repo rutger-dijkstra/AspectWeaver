@@ -14,32 +14,16 @@ namespace AspectWeaver.Tests {
       public T Echo<T>(T arg) => arg;
     }
 
-    class BeforeCallDone: InvocationInterceptor {
-      public override Advice BeforeCall(object[] args) => Advice.Done;
-    }
-
-    class Noop: InvocationInterceptor { }
-
-    [TestMethod]
-    public void PreemptCallTest() {
-      var it = (new Imp()).AddAspect<It>(_ => new BeforeCallDone());
-      Assert.AreEqual(0, it.Jo());
-      Assert.AreEqual(default(DateTime), it.Echo(DateTime.Today));
-      it = (new Imp()).AddAspect<It>(_ => new Noop());
-      Assert.AreEqual(42, it.Jo());
-      Assert.AreEqual(DateTime.Today, it.Echo(DateTime.Today));
-    }
+    class Noop: AdviceProvider { }
 
     [TestMethod]
     public void WeaklyTypedCreationTest() {
-      object isIt = Weaver.Create(typeof(It), new Imp(), _ => new BeforeCallDone());
+      var record = new List<string>();
+      var isIt = Weaver.Create(typeof(It), new Imp(), m => new CallRecorder(m,record));
       Assert.IsTrue(isIt is It);
       var it = (It)isIt;
-      Assert.AreEqual(0, it.Jo());
-      Assert.AreEqual(default(DateTime), it.Echo(DateTime.Today));
-      it = (new Imp()).AddAspect<It>(_ => new Noop());
       Assert.AreEqual(42, it.Jo());
-      Assert.AreEqual(DateTime.Today, it.Echo(DateTime.Today));
+      Assert.AreEqual(2, record.Count);
     }
 
   }
