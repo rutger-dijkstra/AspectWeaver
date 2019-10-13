@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace AspectWeaver.Util {
 
   /// <summary>
-  /// This class is not intended to be used rom user code.
+  /// This class is not intended to be used from user code.
   /// </summary>
   public class DiscriminatingDispatchProxy: DispatchProxy {
 
